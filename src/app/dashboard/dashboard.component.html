@@ -1,0 +1,82 @@
+<div class="main">
+    <div class="top-bar">
+        <div class="d-flex align-items-center">
+            <div>
+                <a href="javascript:void(0)" class="return-btn mr-4"><i class="fa fa-chevron-left"></i>  Retour</a>
+            </div>
+            <span><i class="fa fa-file-alt fs-22 mr-3"></i> <span class="heading">Mes modèles</span> </span>
+        </div>
+        <div>
+            <a href="javascript:void(0)" class="btn-add"> <i class="fa fa-plus"></i> <span class="px-2"> | </span> Ajouter un modèle </a>
+        </div>
+    </div>
+
+    <div class="main-card">
+        <div class="banner">
+            <span><i class="fa fa-file-alt fs-18 mr-3"></i> <span class="heading1">Pré-Évaluation</span> </span>
+        </div>
+        <div class="row">
+            <div class="col-md-6 pr-0">
+                <div class="search-with-icon pr-4">
+                    <input type="text" placeholder="Recherche des certifications…" [(ngModel)]="filterTerm" name="" id="">
+                    <div class="icon"><i class="fa fa-search"></i></div>
+                </div>
+                <ng-container>
+                
+                    <div class="header pr-3">
+                            <div class="d-flex align-items-center">
+                                        <div class="form-check-1">
+                                            <input type="checkbox" class="styled-checkbox" [checked]="isAllCheckBoxChecked()"
+                                             (change)="checkAllCheckBox($event)" id="0">
+                                            <label for="0" class="form-check-label"> </label>
+                                        </div>
+                                <div class="count text-mute fs-14">ID</div>
+                                <div class="detail-box">
+                                    <div class="fs-14 text-mute">Nom du modèle</div>
+                                </div>
+                            </div>
+                            
+                    </div>
+                    <div class="data-table pr-3">
+
+                    <div class="inner-card" *ngFor="let p of pdfs | filter:filterTerm; let i=index;" [ngClass]="[p.checked ? 'selected' : '', p.disabled ? '' : 'disabled']">
+                        <div class="d-flex align-items-center">
+                                    <div class="form-check-1">
+                                        <input type="checkbox" class="styled-checkbox" id="p{{i}}" [(ngModel)]="pdfs[i].checked">
+                                        <label for="p{{i}}" class="form-check-label"> </label>
+                                    </div>
+                            <div class="count">{{ [i+1] }}</div>
+                            <div class="detail-box">
+                                <div class="name">{{p.name}}</div>
+                                <div class="date">31/07/2021 a 21:34</div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="icons">
+                                <a href="javascript:void(0)" (click)="openFilePreview(i)"> <i class="fa fa-eye"></i> </a>
+                                <a href="javascript:void(0)"><i class="fa fa-edit mx-3"></i></a>
+                            </div>
+                            <div class="toggle-btn">
+                                <label class="switch">
+                                    <input type="checkbox" checked id="{{p.id}}" [(ngModel)]="pdfs[i].disabled">
+                                    <span class="slider round"></span>
+                                  </label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </ng-container>
+            
+            </div>
+            <div class="col-md-6 pl-lg-4">
+                <div class="pdf">
+                    <iframe [src]="cleanUrl(fileUrl)" frameborder="0" height="100%" width="100%"></iframe>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
